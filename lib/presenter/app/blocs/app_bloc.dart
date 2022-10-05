@@ -4,7 +4,7 @@ import 'app_event.dart';
 import 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc() : super(AppState.pure()) {
+  AppBloc() : super(const AppState()) {
     on<ChangeTabAppEvent>(_changeAppTab);
   }
 

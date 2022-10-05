@@ -2,19 +2,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 enum AppTab {
-  home,
   search,
+  home,
   personal,
 }
 
 class AppState extends Equatable {
   final AppTab tab;
 
-  const AppState({required this.tab});
-
-  factory AppState.pure() {
-    return const AppState(tab: AppTab.home);
-  }
+  const AppState({this.tab = AppTab.home});
 
   AppState copyWith({
     AppTab? tab,

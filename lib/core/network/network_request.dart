@@ -1,1 +1,3 @@
+class NetworkRequestBuilder {}
+
 class NetworkRequest {}

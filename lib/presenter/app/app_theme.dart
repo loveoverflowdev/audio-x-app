@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app.dart';
 
@@ -7,14 +8,67 @@ extension AppTheme on App {
 
   ThemeData get defaultTheme => ThemeData(
         primaryColor: _primaryColor,
-        appBarTheme: const AppBarTheme(
+        textTheme: TextTheme(
+          titleLarge: GoogleFonts.notoSans(
+            textStyle: const TextStyle(
+              color: Color(0xff3d3e3f),
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          titleMedium: GoogleFonts.notoSans(
+            textStyle: const TextStyle(
+              color: Color(0xff3d3e3f),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          bodyMedium: GoogleFonts.notoSans(
+            textStyle: const TextStyle(
+              color: Color(0xff767778),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          labelMedium: GoogleFonts.notoSans(
+            textStyle: const TextStyle(
+              color: Color(0xfff0b764),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          displayMedium: GoogleFonts.notoSans(
+            textStyle: const TextStyle(
+              color: Color(0xffbfbfc0),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        colorScheme: const ColorScheme(
+          outline: const Color(0xfff0b764),
+          background: Colors.black,
+          primary: Colors.black,
+          surface: Colors.black,
+          brightness: Brightness.light,
+          error: Colors.black,
+          onBackground: Colors.black,
+          onPrimary: Colors.black,
+          onError: Colors.black,
+          onSecondary: Colors.black,
+          onSurface: Colors.black,
+          secondary: Colors.black,
+        ),
+        appBarTheme: AppBarTheme(
           centerTitle: true,
           color: _primaryColor,
           elevation: 8,
-          titleTextStyle: TextStyle(
-            color: Color(0xff020200),
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+          titleTextStyle: GoogleFonts.notoSans(
+            textStyle: const TextStyle(
+              color: Color(0xff020200),
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -22,10 +76,10 @@ extension AppTheme on App {
           backgroundColor: Colors.white,
           selectedItemColor: _primaryColor,
           selectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
           unselectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
       );

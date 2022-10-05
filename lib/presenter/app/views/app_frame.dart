@@ -33,35 +33,39 @@ class AppFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Audio X',
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Audio X',
+            style: Theme.of(context).appBarTheme.titleTextStyle,
+          ),
         ),
-      ),
-      body: BlocBuilder<AppBloc, AppState>(
-        builder: (context, state) {
-          final selectedTab = state.tab;
-          return IndexedStack(
-            index: selectedTab.index,
-            children: _pages,
-          );
-        },
-      ),
-      bottomNavigationBar: BlocBuilder<AppBloc, AppState>(
-        builder: (context, state) {
-          final selectedTab = state.tab;
-          return BottomNavigationBar(
-            currentIndex: selectedTab.index,
-            onTap: (indexTab) => _changeAppTab(context, indexTab: indexTab),
-            items: _appTabList
-                .map((tab) => BottomNavigationBarItem(
-                      icon: Icon(tab.icon),
-                      label: tab.label,
-                    ))
-                .toList(),
-          );
-        },
+        body: BlocBuilder<AppBloc, AppState>(
+          builder: (context, state) {
+            final selectedTab = state.tab;
+            return IndexedStack(
+              index: selectedTab.index,
+              children: _pages,
+            );
+          },
+        ),
+        bottomNavigationBar: BlocBuilder<AppBloc, AppState>(
+          builder: (context, state) {
+            final selectedTab = state.tab;
+            return BottomNavigationBar(
+              currentIndex: selectedTab.index,
+              onTap: (indexTab) => _changeAppTab(context, indexTab: indexTab),
+              items: _appTabList
+                  .map((tab) => BottomNavigationBarItem(
+                        icon: Icon(tab.icon),
+                        label: tab.label,
+                      ))
+                  .toList(),
+            );
+          },
+        ),
       ),
     );
   }
