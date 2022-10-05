@@ -5,10 +5,8 @@ class PersonalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Personal Page'),
-      ),
+    return Center(
+      child: Text('Personal Page'),
     );
   }
 }

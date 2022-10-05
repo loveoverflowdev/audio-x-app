@@ -36,20 +36,42 @@ class AppFrame extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Audio X',
-            style: Theme.of(context).appBarTheme.titleTextStyle,
+        backgroundColor: Theme.of(context).primaryColor,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              AppBar(
+                toolbarHeight: 40,
+                title: Text(
+                  'Audio X',
+                  style: Theme.of(context).appBarTheme.titleTextStyle,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 60),
+                padding: const EdgeInsets.only(top: 20),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: BlocBuilder<AppBloc, AppState>(
+                    builder: (context, state) {
+                      final selectedTab = state.tab;
+                      return IndexedStack(
+                        index: selectedTab.index,
+                        children: _pages,
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-        body: BlocBuilder<AppBloc, AppState>(
-          builder: (context, state) {
-            final selectedTab = state.tab;
-            return IndexedStack(
-              index: selectedTab.index,
-              children: _pages,
-            );
-          },
         ),
         bottomNavigationBar: BlocBuilder<AppBloc, AppState>(
           builder: (context, state) {
@@ -58,10 +80,12 @@ class AppFrame extends StatelessWidget {
               currentIndex: selectedTab.index,
               onTap: (indexTab) => _changeAppTab(context, indexTab: indexTab),
               items: _appTabList
-                  .map((tab) => BottomNavigationBarItem(
-                        icon: Icon(tab.icon),
-                        label: tab.label,
-                      ))
+                  .map(
+                    (tab) => BottomNavigationBarItem(
+                      icon: Icon(tab.icon),
+                      label: tab.label,
+                    ),
+                  )
                   .toList(),
             );
           },

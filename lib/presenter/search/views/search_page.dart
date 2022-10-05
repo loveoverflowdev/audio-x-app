@@ -11,17 +11,15 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: BlocProvider(
-          create: (context) => SearchNovelListCubit(
-            getNovelListUseCase: GetNovelListUseCase(
-              repository: NovelRepository(),
-            ),
-          )..getNoveList(),
-          child: const SearchNovelListView(),
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: BlocProvider(
+        create: (context) => SearchNovelListCubit(
+          getNovelListUseCase: GetNovelListUseCase(
+            repository: NovelRepository(),
+          ),
+        )..getNoveList(),
+        child: const SearchNovelListView(),
       ),
     );
   }

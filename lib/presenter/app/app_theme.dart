@@ -8,6 +8,7 @@ extension AppTheme on App {
 
   ThemeData get defaultTheme => ThemeData(
         primaryColor: _primaryColor,
+        backgroundColor: Colors.white,
         textTheme: TextTheme(
           titleLarge: GoogleFonts.notoSans(
             textStyle: const TextStyle(
@@ -46,7 +47,7 @@ extension AppTheme on App {
           ),
         ),
         colorScheme: const ColorScheme(
-          outline: const Color(0xfff0b764),
+          outline: Color(0xfff0b764),
           background: Colors.black,
           primary: Colors.black,
           surface: Colors.black,
@@ -60,9 +61,9 @@ extension AppTheme on App {
           secondary: Colors.black,
         ),
         appBarTheme: AppBarTheme(
-          centerTitle: true,
+          // centerTitle: true,
           color: _primaryColor,
-          elevation: 8,
+          elevation: 0,
           titleTextStyle: GoogleFonts.notoSans(
             textStyle: const TextStyle(
               color: Color(0xff020200),
