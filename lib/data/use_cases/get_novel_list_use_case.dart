@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import '../models/novel/novel.dart';
 
 class GetNovelListUseCase extends UseCase<List<Novel>> {
-  final Repository<Novel> repository;
+  final Repository<Novel, NovelQueryParam> repository;
 
   GetNovelListUseCase({
     required this.repository,

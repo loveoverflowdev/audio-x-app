@@ -5,8 +5,11 @@ class PersonalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Personal Page'),
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Center(
+        child: Text('Personal Page'),
+      ),
     );
   }
 }

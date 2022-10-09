@@ -5,9 +5,13 @@ import 'package:dartz/dartz.dart';
 
 import '../models/novel/novel.dart';
 
-class NovelRepository extends Repository<Novel> {
+class NovelQueryParam {}
+
+class NovelRepository extends Repository<Novel, NovelQueryParam> {
   @override
-  Future<Either<List<Novel>, Exception>> getList() async {
+  Future<Either<List<Novel>, Exception>> getList({
+    NovelQueryParam? queryParam,
+  }) async {
     return Left(
       List.generate(
             10,
@@ -60,7 +64,9 @@ class NovelRepository extends Repository<Novel> {
   }
 
   @override
-  Future<Either<NovelDetail, Exception>> getOne() async {
+  Future<Either<NovelDetail, Exception>> getOne({
+    NovelQueryParam? queryParam,
+  }) async {
     return Left(
       NovelDetail(
         author: 'Author',

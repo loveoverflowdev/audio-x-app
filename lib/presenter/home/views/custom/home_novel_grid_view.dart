@@ -16,7 +16,7 @@ class HomeNovelGridView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          padding: const EdgeInsets.only(top: 16, bottom: 16),
           child: Text(
             state.title,
             style: Theme.of(context).textTheme.titleLarge,

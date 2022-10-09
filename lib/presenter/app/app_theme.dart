@@ -4,51 +4,59 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app.dart';
 
 extension AppTheme on App {
-  static const _primaryColor = Color(0xfffed603);
+  static const _primaryColor = Colors.white; // Color(0xfffed603);
+  static const _backgroundColor = Color(0xff121212);
+  static const _secondaryColor = Color(0xfffbbc04);
+  static const _secondaryTextColor = Color(0xffb7b7b7);
 
   ThemeData get defaultTheme => ThemeData(
         primaryColor: _primaryColor,
-        backgroundColor: Colors.white,
+        backgroundColor: _backgroundColor,
+        secondaryHeaderColor: _secondaryColor,
         textTheme: TextTheme(
           titleLarge: GoogleFonts.notoSans(
             textStyle: const TextStyle(
-              color: Color(0xff3d3e3f),
+              color: _primaryColor,
               fontSize: 20,
               fontWeight: FontWeight.w700,
             ),
           ),
           titleMedium: GoogleFonts.notoSans(
             textStyle: const TextStyle(
-              color: Color(0xff3d3e3f),
+              color: _primaryColor,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
           ),
           bodyMedium: GoogleFonts.notoSans(
             textStyle: const TextStyle(
-              color: Color(0xff767778),
+              color: _secondaryTextColor,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
           ),
           labelMedium: GoogleFonts.notoSans(
             textStyle: const TextStyle(
-              color: Color(0xfff0b764),
+              color: _primaryColor,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
           ),
           displayMedium: GoogleFonts.notoSans(
             textStyle: const TextStyle(
-              color: Color(0xffbfbfc0),
+              color: _primaryColor,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
+        iconTheme: const IconThemeData(
+          color: _secondaryTextColor,
+          size: 24,
+        ),
         colorScheme: const ColorScheme(
-          outline: Color(0xfff0b764),
-          background: Colors.black,
+          outline: _secondaryTextColor,
+          background: _backgroundColor,
           primary: Colors.black,
           surface: Colors.black,
           brightness: Brightness.light,
@@ -58,15 +66,14 @@ extension AppTheme on App {
           onError: Colors.black,
           onSecondary: Colors.black,
           onSurface: Colors.black,
-          secondary: Colors.black,
+          secondary: _secondaryColor,
         ),
         appBarTheme: AppBarTheme(
-          // centerTitle: true,
-          color: _primaryColor,
+          color: _secondaryColor,
           elevation: 0,
           titleTextStyle: GoogleFonts.notoSans(
             textStyle: const TextStyle(
-              color: Color(0xff020200),
+              color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.w700,
             ),
@@ -74,7 +81,7 @@ extension AppTheme on App {
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           elevation: 8,
-          backgroundColor: Colors.white,
+          backgroundColor: _backgroundColor,
           selectedItemColor: _primaryColor,
           selectedLabelStyle: TextStyle(
             fontWeight: FontWeight.w700,

@@ -6,22 +6,36 @@ class AudioTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Center(
-            child: CachedNetworkImage(
-              imageUrl:
-                  'https://cn-e-pic.itoon.org/cartoon-posters/1183984b56b.jpg-posterend4',
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: SizedBox(
+        height: 80,
+        child: Row(
+          children: [
+            Center(
+              child: CachedNetworkImage(
+                fit: BoxFit.contain,
+                imageUrl:
+                    'https://cn-e-pic.itoon.org/cartoon-posters/22021025272.jpg-posterend4',
+                errorWidget: (context, url, error) {
+                  return const Center(
+                    child: Icon(Icons.error_outline),
+                  );
+                },
+              ),
             ),
-          ),
-          Column(
-            children: const [
-              Text('Novel name'),
-              Text('Novel Description, Brief, etc, ...')
-            ],
-          )
-        ],
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: const [
+                  Text('Novel name'),
+                  Expanded(child: Text('Novel Description, Brief, etc, ...'))
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

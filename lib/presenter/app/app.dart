@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import 'views/app_frame.dart';
 import 'app_theme.dart';
-import 'blocs/app_bloc.dart';
+import 'cubits/app_cubit.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -37,7 +37,7 @@ class App extends StatelessWidget {
       ),
     );
     return BlocProvider(
-      create: (context) => AppBloc(),
+      create: (context) => AppCubit(),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: defaultTheme,

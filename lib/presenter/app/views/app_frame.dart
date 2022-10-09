@@ -1,12 +1,11 @@
-import 'package:audio_x_app/presenter/app/blocs/app_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../personal/personal.dart';
-import '../blocs/app_state.dart';
+import '../cubits/app_state.dart';
 import '../../search/search.dart';
 import '../../home/home.dart';
-import '../blocs/app_bloc.dart';
+import '../cubits/app_cubit.dart';
 
 class AppFrame extends StatelessWidget {
   const AppFrame({super.key});
@@ -28,7 +27,7 @@ class AppFrame extends StatelessWidget {
     final BuildContext context, {
     required int indexTab,
   }) {
-    context.read<AppBloc>().add(ChangeTabAppEvent(AppTab.values[indexTab]));
+    context.read<AppCubit>().setAppTab(AppTab.values[indexTab]);
   }
 
   @override
@@ -36,53 +35,54 @@ class AppFrame extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        body: SafeArea(
-          child: Stack(
-            children: [
-              AppBar(
-                toolbarHeight: 40,
-                title: Text(
-                  'Audio X',
-                  style: Theme.of(context).appBarTheme.titleTextStyle,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 60),
-                padding: const EdgeInsets.only(top: 20),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
-                  ),
-                  color: Colors.white,
-                ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: BlocBuilder<AppBloc, AppState>(
-                    builder: (context, state) {
-                      final selectedTab = state.tab;
-                      return IndexedStack(
-                        index: selectedTab.index,
-                        children: _pages,
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+        appBar: AppBar(
+          toolbarHeight: 40,
+          title: Text(
+            'Audio X',
+            style: Theme.of(context).appBarTheme.titleTextStyle,
           ),
         ),
-        bottomNavigationBar: BlocBuilder<AppBloc, AppState>(
+        body: SafeArea(
+          child: Container(
+            margin: const EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.only(top: 16),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+              color: Theme.of(context).backgroundColor,
+            ),
+            child: Align(
+              alignment: Alignment.center,
+              child: BlocBuilder<AppCubit, AppState>(
+                builder: (context, state) {
+                  final selectedTab = state.tab;
+                  return IndexedStack(
+                    index: selectedTab.index,
+                    children: _pages,
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+        bottomNavigationBar: BlocBuilder<AppCubit, AppState>(
           builder: (context, state) {
             final selectedTab = state.tab;
             return BottomNavigationBar(
               currentIndex: selectedTab.index,
+              unselectedIconTheme: Theme.of(context).iconTheme,
+              unselectedItemColor: Theme.of(context).colorScheme.outline,
               onTap: (indexTab) => _changeAppTab(context, indexTab: indexTab),
               items: _appTabList
                   .map(
                     (tab) => BottomNavigationBarItem(
-                      icon: Icon(tab.icon),
+                      icon: Icon(
+                        tab.icon,
+                        color: Theme.of(context).primaryColor,
+                      ),
                       label: tab.label,
                     ),
                   )
