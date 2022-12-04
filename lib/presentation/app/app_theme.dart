@@ -5,14 +5,20 @@ import 'app.dart';
 
 extension AppTheme on App {
   static const _primaryColor = Colors.white; // Color(0xfffed603);
-  static const _backgroundColor = Color(0xff121212);
+  static const _backgroundColor = Color(0xff100e0e);
   static const _secondaryColor = Color(0xfffbbc04);
   static const _secondaryTextColor = Color(0xffb7b7b7);
+  static const _dividerColor = Color(0xffeeeeee);
+  static const _appBarTextColor = Colors.white;
+  static const _surfaceColor = Color(0xff262629);
+  static const _hintColor = Color(0xffcacaca);
 
   ThemeData get defaultTheme => ThemeData(
         primaryColor: _primaryColor,
         backgroundColor: _backgroundColor,
         secondaryHeaderColor: _secondaryColor,
+        dividerColor: _dividerColor,
+        hintColor: _hintColor,
         textTheme: TextTheme(
           titleLarge: GoogleFonts.notoSans(
             textStyle: const TextStyle(
@@ -24,8 +30,8 @@ extension AppTheme on App {
           titleMedium: GoogleFonts.notoSans(
             textStyle: const TextStyle(
               color: _primaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
           bodyMedium: GoogleFonts.notoSans(
@@ -58,7 +64,7 @@ extension AppTheme on App {
           outline: _secondaryTextColor,
           background: _backgroundColor,
           primary: Colors.black,
-          surface: Colors.black,
+          surface: _surfaceColor,
           brightness: Brightness.light,
           error: Colors.black,
           onBackground: Colors.black,
@@ -73,7 +79,7 @@ extension AppTheme on App {
           elevation: 0,
           titleTextStyle: GoogleFonts.notoSans(
             textStyle: const TextStyle(
-              color: Colors.white,
+              color: _appBarTextColor,
               fontSize: 20,
               fontWeight: FontWeight.w700,
             ),

@@ -3,9 +3,9 @@ import 'package:audio_x_app/domain/repository.dart';
 import 'package:audio_x_app/domain/use_case.dart';
 import 'package:dartz/dartz.dart';
 
-import '../models/novel/novel.dart';
+import '../../domain/entities/novel.dart';
 
-class GetNovelListUseCase extends UseCase<List<Novel>> {
+class GetNovelListUseCase extends UseCase<Iterable<Novel>> {
   final Repository<Novel, NovelQueryParam> repository;
 
   GetNovelListUseCase({
@@ -13,7 +13,7 @@ class GetNovelListUseCase extends UseCase<List<Novel>> {
   });
 
   @override
-  Future<Either<List<Novel>, Exception>> invoke() {
+  Future<Either<Iterable<Novel>, Exception>> invoke() {
     return repository.getList();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:audio_x_app/data/network/request/rest_client.dart';
 import 'package:audio_x_app/data/respositories/novel_repository.dart';
 import 'package:audio_x_app/data/use_cases/get_novel_list_use_case.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,6 @@ Future<void> main() async {
 void _registerRepositories() {
   final getIt = GetIt.instance;
   getIt.registerSingleton<NovelRepository>(
-    NovelRepository(),
+    NovelRepository(networkClient: RestClient()),
   );
 }
