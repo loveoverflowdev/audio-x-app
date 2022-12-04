@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'presenter/app/app.dart';
+import 'presentation/app/app.dart';
 
 Future<void> main() async {
   _registerRepositories();

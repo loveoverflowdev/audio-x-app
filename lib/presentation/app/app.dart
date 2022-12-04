@@ -1,4 +1,4 @@
-import 'package:audio_x_app/presenter/audio/views/audio_page.dart';
+import 'package:audio_x_app/presentation/audio/views/audio_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
       GoRoute(
         path: '/audio',
         builder: (BuildContext context, GoRouterState state) {
-          return const AudioPage();
+          return const AudioListPage();
         },
       ),
     ],

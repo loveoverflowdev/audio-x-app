@@ -1,4 +1,4 @@
-import 'package:audio_x_app/presenter/home/cubits/home_novel_list_cubit.dart';
+import 'package:audio_x_app/presentation/home/cubits/home_novel_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'custom/audio_tile.dart';
+import 'custom/tile/audio_list_tile.dart';
 
-class AudioPage extends StatelessWidget {
-  const AudioPage({super.key});
+class AudioListPage extends StatelessWidget {
+  const AudioListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class AudioPage extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: 20,
             itemBuilder: (context, index) {
-              return const AudioTile();
+              return const AudioListTile();
             },
           ),
         ),

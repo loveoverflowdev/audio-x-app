@@ -21,7 +21,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParam> {
               name: 'Novel Name',
               tag: NovelTag.romance,
               imageUrl:
-                  'https://cn-e-pic.itoon.org/cartoon-posters/2171209bffc.jpg-posterend4',
+                  'https://i.pinimg.com/236x/1d/21/20/1d2120e48360c4beab759591e4a789c8--one-piece-manga-one-piece-chibi.jpg',
             ),
           ) +
           [
@@ -31,7 +31,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParam> {
               name: 'Long Long Long Long Long Long Novel Name',
               tag: NovelTag.romance,
               imageUrl:
-                  'https://cn-e-pic.itoon.org/cartoon-posters/2171209bffc.jpg-posterend4',
+                  'https://i.pinimg.com/236x/1d/21/20/1d2120e48360c4beab759591e4a789c8--one-piece-manga-one-piece-chibi.jpg',
             ),
             Novel(
               author: 'Long Long Author',
@@ -39,7 +39,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParam> {
               name: 'Long Long Long Long Long Novel Name',
               tag: NovelTag.romance,
               imageUrl:
-                  'https://cn-e-pic.itoon.org/cartoon-posters/2171209bffc.jpg-posterend4',
+                  'https://i.pinimg.com/236x/1d/21/20/1d2120e48360c4beab759591e4a789c8--one-piece-manga-one-piece-chibi.jpg',
             ),
             Novel(
               author: 'Long Long Author',
@@ -48,7 +48,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParam> {
               name: 'Novel Name',
               tag: NovelTag.romance,
               imageUrl:
-                  'https://cn-e-pic.itoon.org/cartoon-posters/2171209bffc.jpg-posterend4',
+                  'https://i.pinimg.com/236x/1d/21/20/1d2120e48360c4beab759591e4a789c8--one-piece-manga-one-piece-chibi.jpg',
             ),
             Novel(
               author: 'Long Long Long Long Long Long Long Long Long LongAuthor',
@@ -57,7 +57,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParam> {
                   'Long LongLong Long Long Long Long Long Long Long Long Novel Name',
               tag: NovelTag.romance,
               imageUrl:
-                  'https://cn-e-pic.itoon.org/cartoon-posters/2171209bffc.jpg-posterend4',
+                  'https://i.pinimg.com/236x/1d/21/20/1d2120e48360c4beab759591e4a789c8--one-piece-manga-one-piece-chibi.jpg',
             ),
           ],
     );
@@ -74,7 +74,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParam> {
         name: 'Novel Name',
         tag: NovelTag.romance,
         imageUrl:
-            'https://cn-e-pic.itoon.org/cartoon-posters/2171209bffc.jpg-posterend4',
+            'https://i.pinimg.com/236x/1d/21/20/1d2120e48360c4beab759591e4a789c8--one-piece-manga-one-piece-chibi.jpg',
       ),
     );
   }
