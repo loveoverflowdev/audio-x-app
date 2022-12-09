@@ -16,7 +16,7 @@ class CommonCacheImage extends StatefulWidget {
     required this.imageUrl,
     this.height,
     this.width,
-    this.radius = 16,
+    this.radius = 8,
     this.hasFullScreen = true,
     this.fit = BoxFit.cover,
   });
@@ -42,7 +42,7 @@ class _CommonCacheImageState extends State<CommonCacheImage> {
                 iconTheme: const IconThemeData(
                   color: Colors.white, //change your color here
                 ),
-                backgroundColor: Theme.of(context).backgroundColor,
+                backgroundColor: Colors.transparent,
                 foregroundColor: Colors.white,
                 toolbarHeight: 60,
               ),
@@ -64,21 +64,24 @@ class _CommonCacheImageState extends State<CommonCacheImage> {
     final theme = Theme.of(context);
     final placeholderWidget = Shimmer.fromColors(
       direction: ShimmerDirection.ltr,
-      baseColor: theme.colorScheme.surface,
-      highlightColor: theme.dividerColor,
+      baseColor: theme.colorScheme.surface.withOpacity(0.8),
+      highlightColor: theme.colorScheme.surface.withOpacity(0.16),
       child: Container(
-        color: theme.dividerColor,
+        decoration: BoxDecoration(
+          color: theme.dividerColor,
+          borderRadius: BorderRadius.circular(widget.radius),
+        ),
       ),
     );
     final isValidUrl = Uri.parse(widget.imageUrl).isAbsolute;
     if (!isValidUrl) return placeholderWidget;
 
     return GestureDetector(
-      onTap: () => widget.hasFullScreen
-          ? _showFullModel(
-              context,
-              imageProvider: _imageProvider,
-            )
+      onTap: widget.hasFullScreen
+          ? () => _showFullModel(
+                context,
+                imageProvider: _imageProvider,
+              )
           : null,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(widget.radius),

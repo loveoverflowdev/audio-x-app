@@ -1,7 +1,7 @@
-import 'package:audio_x_app/presentation/features/audio/views/audio_listener_page.dart';
+import 'package:audio_x_app/presentation/features/audio/audio.dart';
 import 'package:audio_x_app/presentation/widgets/image/common_cached_image.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../../domain/entities/novel.dart';
 
@@ -14,9 +14,10 @@ class SearchNovelCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return const AudioListenerPage();
-        }));
+        context.push(
+          '/audio',
+          extra: AudioListPageGoParameter(novel: novel),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -31,6 +32,7 @@ class SearchNovelCell extends StatelessWidget {
                   child: CommonCacheImage(
                     imageUrl: novel.imageUrl,
                     fit: BoxFit.cover,
+                    hasFullScreen: false,
                   ),
                 ),
               ),

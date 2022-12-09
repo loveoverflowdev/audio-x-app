@@ -25,19 +25,15 @@ class HomePage extends StatelessWidget {
           children: [
             BlocProvider(
               create: (context) => HomeNovelListCubit(
-                getNovelListUseCase: GetNovelListUseCase(
-                  repository: GetIt.instance<NovelRepository>(),
-                ),
-              )..getNovelList(title: 'Novel List 1'),
+                getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
+              )..getNovelList(title: 'Truyện Hot'),
               child: const HomeNovelGridView(),
             ),
             const SizedBox(height: 24),
             BlocProvider(
               create: (context) => HomeNovelListCubit(
-                getNovelListUseCase: GetNovelListUseCase(
-                  repository: GetIt.instance<NovelRepository>(),
-                ),
-              )..getNovelList(title: 'Novel List 2'),
+                getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
+              )..getNovelList(title: 'Dành Cho Bạn'),
               child: const HomeNovelGridView(),
             ),
           ],

@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'custom/just_audio/common.dart';
+import '../just_audio/common.dart';
 
 class AudioListenerPage extends StatefulWidget {
-  const AudioListenerPage({super.key});
+  final String title;
+  final String mp3Url;
+
+  const AudioListenerPage({
+    super.key,
+    required this.mp3Url,
+    required this.title,
+  });
 
   @override
   State<AudioListenerPage> createState() => _AudioListenerPageState();
@@ -14,18 +21,16 @@ class AudioListenerPage extends StatefulWidget {
 
 class _AudioListenerPageState extends State<AudioListenerPage> {
   final _player = AudioPlayer();
-  final _audioSource = LockCachingAudioSource(Uri.parse(
-    // Supports range requests:
-    "https://ia903006.us.archive.org/15/items/DauPhaThuongKhungTH/01_Ch%C6%B0%C6%A1ng%200001-0050%20Dau%20Pha%20Thuong%20Khung.mp3",
-    // Doesn't support range requests:
-    //"https://filesamples.com/samples/audio/mp3/sample4.mp3",
-  ));
+  late final LockCachingAudioSource _audioSource;
 
   @override
   void initState() {
     super.initState();
     // ambiguate(WidgetsBinding.instance)!.addObserver(this);
     _init();
+    _audioSource = LockCachingAudioSource(Uri.parse(
+      widget.mp3Url,
+    ));
   }
 
   Future<void> _init() async {
@@ -82,7 +87,7 @@ class _AudioListenerPageState extends State<AudioListenerPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Audio Player'),
+        title: Text(widget.title),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

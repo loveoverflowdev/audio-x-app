@@ -39,7 +39,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SizedBox(
-      height: 56,
+      height: 48,
       child: Row(
         children: [
           Expanded(
@@ -48,35 +48,38 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: TextField(
-                controller: _textEditingController,
-                textAlignVertical: TextAlignVertical.center,
-                cursorColor: Theme.of(context).primaryColor,
-                decoration: InputDecoration(
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: IconButton(
-                      onPressed: () {
-                        _textEditingController.clear();
-                        _onTextChanged(context, value: '');
-                      },
-                      icon: Icon(
-                        Icons.clear,
-                        color: theme.primaryColor,
+              child: Center(
+                child: TextField(
+                  controller: _textEditingController,
+                  textAlignVertical: TextAlignVertical.center,
+                  cursorColor: Theme.of(context).primaryColor,
+                  decoration: InputDecoration(
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: IconButton(
+                        onPressed: () {
+                          _textEditingController.clear();
+                          _onTextChanged(context, value: '');
+                        },
+                        icon: Icon(
+                          Icons.clear,
+                          color: theme.primaryColor,
+                        ),
                       ),
                     ),
+                    border: InputBorder.none,
+                    hintText: 'Search...',
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                    hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.hintColor,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  border: InputBorder.none,
-                  hintText: 'Search...',
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                  hintStyle: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.hintColor,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  onChanged: (value) {
+                    _onTextChanged(context, value: value);
+                  },
                 ),
-                onChanged: (value) {
-                  _onTextChanged(context, value: value);
-                },
               ),
             ),
           ),

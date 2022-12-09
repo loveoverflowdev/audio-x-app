@@ -1,19 +1,22 @@
-import 'package:audio_x_app/data/respositories/novel_repository.dart';
 import 'package:audio_x_app/domain/repository.dart';
 import 'package:audio_x_app/domain/use_case.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../domain/entities/novel.dart';
+import '../../domain/params.dart';
 
-class GetNovelListUseCase extends UseCase<Iterable<Novel>> {
-  final Repository<Novel, NovelQueryParam> repository;
+class GetNovelListParams {}
+
+class GetNovelListUseCase
+    implements UseCase<Iterable<Novel>, GetNovelListParams> {
+  final Repository<Novel, NovelQueryParams> repository;
 
   GetNovelListUseCase({
     required this.repository,
   });
 
   @override
-  Future<Either<Iterable<Novel>, Exception>> invoke() {
-    return repository.getList();
+  Future<Either<Iterable<Novel>, Exception>> invoke(GetNovelListParams params) {
+    return repository.getList(queryParam: NovelQueryParams());
   }
 }

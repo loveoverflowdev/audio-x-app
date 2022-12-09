@@ -20,7 +20,7 @@ class SearchNovelListView extends StatelessWidget {
           floating: true,
           backgroundColor: Theme.of(context).backgroundColor,
           automaticallyImplyLeading: false,
-          toolbarHeight: 72,
+          toolbarHeight: 80,
           title: CustomSearchBar(onTextChanged: (value) {}),
         ),
         BlocBuilder<SearchNovelListCubit, SearchNovelListState>(

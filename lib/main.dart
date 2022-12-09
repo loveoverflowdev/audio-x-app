@@ -1,5 +1,8 @@
+import 'package:audio_x_app/core/network/network_client.dart';
 import 'package:audio_x_app/data/network/request/rest_client.dart';
+import 'package:audio_x_app/data/respositories/novel_chapter_repository.dart';
 import 'package:audio_x_app/data/respositories/novel_repository.dart';
+import 'package:audio_x_app/data/use_cases/get_novel_chapter_list_use_case.dart';
 import 'package:audio_x_app/data/use_cases/get_novel_list_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -10,6 +13,7 @@ import 'presentation/app/app.dart';
 
 Future<void> main() async {
   _registerRepositories();
+  _registerUseCases();
   WidgetsBinding _ = WidgetsFlutterBinding.ensureInitialized();
   final HydratedStorage storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
@@ -23,8 +27,26 @@ Future<void> main() async {
 }
 
 void _registerRepositories() {
+  final NetworkClient networkClient = RestClient();
   final getIt = GetIt.instance;
-  getIt.registerSingleton<NovelRepository>(
-    NovelRepository(networkClient: RestClient()),
+  getIt.registerSingleton<NovelRepository>(NovelRepository(
+    networkClient: networkClient,
+  ));
+  getIt.registerSingleton<NovelChapterRepository>(NovelChapterRepository(
+    networkClient: networkClient,
+  ));
+}
+
+void _registerUseCases() {
+  final getIt = GetIt.instance;
+  getIt.registerLazySingleton(
+    () => GetNovelListUseCase(
+      repository: getIt<NovelRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => GetNovelChapterListUseCase(
+      repository: getIt<NovelChapterRepository>(),
+    ),
   );
 }

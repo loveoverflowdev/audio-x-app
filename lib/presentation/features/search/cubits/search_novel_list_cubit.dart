@@ -11,7 +11,7 @@ class SearchNovelListCubit extends Cubit<SearchNovelListState> {
         super(const SearchNovelListState());
 
   void getNoveList() async {
-    final result = await _getNovelListUseCase.invoke();
+    final result = await _getNovelListUseCase.invoke(GetNovelListParams());
     result.fold(
       (l) {
         emit(state.copyWith(novelList: l.toList()));

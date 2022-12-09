@@ -10,8 +10,34 @@ class PersonalPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Personal'),
       ),
-      body: Center(
-        child: Text('Personal Page'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'Lich su nghe truyen',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'Danh sach truyen uu thich',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'Danh sach truyen dang nghe',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

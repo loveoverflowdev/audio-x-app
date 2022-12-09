@@ -20,7 +20,8 @@ class App extends StatelessWidget {
       GoRoute(
         path: '/audio',
         builder: (BuildContext context, GoRouterState state) {
-          return const AudioListPage();
+          final parameter = state.extra as AudioListPageGoParameter;
+          return AudioListPage(goParameter: parameter);
         },
       ),
     ],

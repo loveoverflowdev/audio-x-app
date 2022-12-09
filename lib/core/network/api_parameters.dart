@@ -1,9 +1,13 @@
 import 'dart:math';
 
 class ApiParameters {
-  final baseUrl = 'http://192.168.1.207:8080/api/';
+  final baseUrl = 'http://192.168.1.7:8080/api/';
 
   final novelListUri = 'app/novel-list';
+  String novelChapterListUri({
+    required String novelId,
+  }) =>
+      'app/novel-chapter-list/$novelId';
 
   // Timeout
   void setTimeout({required int seconds}) {
@@ -23,7 +27,7 @@ class ApiParameters {
   factory ApiParameters() => _instance;
   ApiParameters._internal();
 
-  Duration _timeout = const Duration(seconds: 10);
+  Duration _timeout = const Duration(seconds: 30);
   Duration get timeout => _timeout;
 }
 

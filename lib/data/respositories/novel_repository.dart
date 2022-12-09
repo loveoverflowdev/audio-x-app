@@ -5,26 +5,25 @@ import 'package:audio_x_app/domain/repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../domain/entities/novel.dart';
+import '../../domain/params.dart';
 
-class NovelQueryParam {}
-
-class NovelRepository extends Repository<Novel, NovelQueryParam> {
-  final NetworkClient _networkClient;
+class NovelRepository extends Repository<Novel, NovelQueryParams> {
+  final NetworkClient networkClient;
 
   NovelRepository({
-    required NetworkClient networkClient,
-  }) : _networkClient = networkClient;
+    required this.networkClient,
+  });
 
   @override
   Future<Either<Iterable<Novel>, Exception>> getList({
-    NovelQueryParam? queryParam,
+    required NovelQueryParams queryParam,
   }) async {
     final request = RestRequestBuilder()
         .setMethod(HttpMethod.get)
         .addUri(ApiParameters().baseUrl)
         .addUri(ApiParameters().novelListUri)
         .build();
-    final response = await _networkClient.requestJson(request);
+    final response = await networkClient.requestJson(request);
     return response.bimap(
       (l) {
         final dataJson = l['data'] is Iterable ? l['data'] as Iterable : [];
@@ -36,7 +35,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParam> {
 
   @override
   Future<Either<Novel, Exception>> getOne({
-    NovelQueryParam? queryParam,
+    required NovelQueryParams queryParam,
   }) async {
     return Left(
       Novel(

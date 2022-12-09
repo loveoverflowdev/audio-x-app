@@ -1,9 +1,9 @@
-import 'package:audio_x_app/presentation/widgets/image/common_cached_image.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:audio_x_app/presentation/features/audio/audio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../domain/entities/novel.dart';
+import '../../../../../widgets/image/common_cached_image.dart';
 
 class HomeNovelCell extends StatelessWidget {
   final Novel novel;
@@ -13,7 +13,10 @@ class HomeNovelCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.go('/audio');
+        context.push(
+          '/audio',
+          extra: AudioListPageGoParameter(novel: novel),
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,6 +30,7 @@ class HomeNovelCell extends StatelessWidget {
                 child: CommonCacheImage(
                   imageUrl: novel.imageUrl,
                   fit: BoxFit.cover,
+                  hasFullScreen: false,
                 ),
               ),
             ),

@@ -48,7 +48,7 @@ class RestClient extends NetworkClient {
 
     if (httpResponse.bodyBytes.isEmpty) {
       return const Right(
-        HttpException('No content'),
+        HttpException('Không có dữ liệu'),
       );
     }
     final jsonResponse = json.decode(utf8.decode(httpResponse.bodyBytes))
@@ -68,7 +68,7 @@ class RestClient extends NetworkClient {
         ..body = json.encode(networkRequest.body)
         ..headers.addAll({
           ...{
-            'content-type': 'application/json',
+            'Content-Type': 'application/json',
             'Accept': '*/*',
             'Connection': 'keep-alive',
             'Accept-Encoding': 'gzip, deflate, br',
