@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/personal_tile_type.dart';
+
 class PersonalPage extends StatelessWidget {
   const PersonalPage({super.key});
+
+  final _tiles = PersonalTileType.values;
 
   @override
   Widget build(BuildContext context) {
@@ -9,35 +13,31 @@ class PersonalPage extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Personal'),
+        title: const Text('Cá nhân'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Lịch sử nghe truyện',
-                style: Theme.of(context).textTheme.bodyMedium,
+        child: ListView.separated(
+          itemCount: _tiles.length,
+          itemBuilder: (BuildContext context, int index) {
+            final tile = _tiles[index];
+            return ListTile(
+              onTap: () {},
+              leading: Icon(
+                tile.icon,
               ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Danh sách truyện yêu thích',
-                style: Theme.of(context).textTheme.bodyMedium,
+              title: Text(
+                tile.title,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Danh sach truyen dang nghe',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
-          ],
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const Divider();
+          },
         ),
       ),
     );

@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Home'),
+        title: const Text('Trang chủ'),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),

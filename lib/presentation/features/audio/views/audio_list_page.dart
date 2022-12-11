@@ -101,7 +101,7 @@ class AudioListPage extends StatelessWidget {
             ),
             Divider(
               color: Theme.of(context).textTheme.caption!.color,
-            )
+            ),
           ],
         ),
       ),
