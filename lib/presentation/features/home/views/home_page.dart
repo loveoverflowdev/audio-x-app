@@ -26,11 +26,11 @@ class HomePage extends StatelessWidget {
           )..getNovelList(title: 'Truyện Hot');
           final recommendNovelCubit = HomeNovelListCubit(
             getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
-          )..getNovelList(title: 'Dành Cho Bạn');
+          )..getNovelList(title: 'Truyện Phổ Biến');
           return RefreshIndicator(
             onRefresh: () async {
               hotNovelCubit.getNovelList(title: 'Truyện Hot');
-              recommendNovelCubit.getNovelList(title: 'Dành Cho Bạn');
+              recommendNovelCubit.getNovelList(title: 'Truyện Phổ Biến');
             },
             child: ListView(
               shrinkWrap: true,

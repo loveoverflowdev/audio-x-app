@@ -7,7 +7,11 @@ import '../models/personal_tile_type.dart';
 class PersonalPage extends StatelessWidget {
   const PersonalPage({super.key});
 
-  final _tiles = PersonalTileType.values;
+  final _tiles = const [
+    PersonalTileType.favorites,
+    PersonalTileType.history,
+    PersonalTileType.about,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,15 @@ class PersonalPage extends StatelessWidget {
                     // TODO: Handle this case.
                     break;
                   case PersonalTileType.about:
-                    // TODO: Handle this case.
+                    showAboutDialog(
+                      context: context,
+                      applicationName: "Audio X",
+                      applicationIcon: Icon(
+                        Icons.book,
+                        size: 40,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    );
                     break;
                   case PersonalTileType.favorites:
                     await Navigator.push(context,

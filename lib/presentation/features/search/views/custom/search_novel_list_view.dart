@@ -20,40 +20,43 @@ class SearchNovelListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const Key centerKey = ValueKey('bottom-sliver-list');
-    return CustomScrollView(
-      primary: true,
-      key: centerKey,
-      slivers: [
-        SliverAppBar(
-          floating: true,
-          backgroundColor: Theme.of(context).backgroundColor,
-          automaticallyImplyLeading: false,
-          toolbarHeight: 80,
-          title: CustomSearchBar(
-            onTextChanged: (value) => _onSearchNovel(context, text: value),
+    return RefreshIndicator(
+      onRefresh: () async => _onSearchNovel(context, text: ''),
+      child: CustomScrollView(
+        primary: true,
+        key: centerKey,
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            backgroundColor: Theme.of(context).backgroundColor,
+            automaticallyImplyLeading: false,
+            toolbarHeight: 80,
+            title: CustomSearchBar(
+              onTextChanged: (value) => _onSearchNovel(context, text: value),
+            ),
           ),
-        ),
-        BlocBuilder<SearchNovelListCubit, SearchNovelListState>(
-          builder: (context, state) {
-            return SliverVisibility(
-              replacementSliver: const SliverToBoxAdapter(
-                child: LoadingWidget(),
-              ),
-              visible: state.status != SearchNovelListStatus.loading,
-              sliver: SliverList(
-                key: centerKey,
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    final novel = state.novelList[index];
-                    return SearchNovelCell(novel: novel);
-                  },
-                  childCount: state.novelList.length,
+          BlocBuilder<SearchNovelListCubit, SearchNovelListState>(
+            builder: (context, state) {
+              return SliverVisibility(
+                replacementSliver: const SliverToBoxAdapter(
+                  child: LoadingWidget(),
                 ),
-              ),
-            );
-          },
-        ),
-      ],
+                visible: state.status != SearchNovelListStatus.loading,
+                sliver: SliverList(
+                  key: centerKey,
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      final novel = state.novelList[index];
+                      return SearchNovelCell(novel: novel);
+                    },
+                    childCount: state.novelList.length,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
