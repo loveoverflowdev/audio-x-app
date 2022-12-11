@@ -21,7 +21,7 @@ class NovelRepository extends Repository<Novel, NovelQueryParams> {
     final request = RestRequestBuilder()
         .setMethod(HttpMethod.get)
         .addUri(ApiParameters().baseUrl)
-        .addUri(ApiParameters().novelListUri)
+        .addUri(ApiParameters().novelListUri(searchText: queryParam.searchText))
         .build();
     final response = await networkClient.requestJson(request);
     return response.bimap(

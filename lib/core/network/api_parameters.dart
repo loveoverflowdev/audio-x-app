@@ -3,7 +3,11 @@ import 'dart:math';
 class ApiParameters {
   final baseUrl = 'http://192.168.1.207:8080/api/';
 
-  final novelListUri = 'app/novel-list';
+  String novelListUri({
+    required String searchText,
+  }) =>
+      'app/novel-list/?searchText=$searchText';
+
   String novelChapterListUri({
     required String novelId,
   }) =>

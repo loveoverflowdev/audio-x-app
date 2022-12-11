@@ -16,14 +16,14 @@ class SearchPage extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Tìm kiếm'),
+        title: const Text('Tìm kiếm'),
       ),
       body: BlocProvider(
         create: (context) => SearchNovelListCubit(
           getNovelListUseCase: GetNovelListUseCase(
             repository: GetIt.instance<NovelRepository>(),
           ),
-        )..getNoveList(),
+        )..getNoveList(searchText: ''),
         child: const SearchNovelListView(),
       ),
     );

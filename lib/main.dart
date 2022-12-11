@@ -9,15 +9,16 @@ import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'data/respositories/favorite_novel_repository.dart';
 import 'presentation/app/app.dart';
 
 Future<void> main() async {
-  _registerRepositories();
-  _registerUseCases();
   WidgetsBinding _ = WidgetsFlutterBinding.ensureInitialized();
   final HydratedStorage storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+  _registerRepositories(storage: storage);
+  _registerUseCases();
   HydratedBlocOverrides.runZoned(
     () => runApp(
       App(),
@@ -26,7 +27,9 @@ Future<void> main() async {
   );
 }
 
-void _registerRepositories() {
+void _registerRepositories({
+  required HydratedStorage storage,
+}) {
   final NetworkClient networkClient = RestClient();
   final getIt = GetIt.instance;
   getIt.registerSingleton<NovelRepository>(NovelRepository(
@@ -34,6 +37,9 @@ void _registerRepositories() {
   ));
   getIt.registerSingleton<NovelChapterRepository>(NovelChapterRepository(
     networkClient: networkClient,
+  ));
+  getIt.registerSingleton<FavoriteNovelRepository>(FavoriteNovelRepository(
+    storage: storage,
   ));
 }
 

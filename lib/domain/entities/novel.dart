@@ -1,11 +1,13 @@
-class Novel {
+import 'package:equatable/equatable.dart';
+
+class Novel extends Equatable {
   final String id;
   final String name;
   final String author;
   final String introduction;
   final String imageUrl;
 
-  Novel({
+  const Novel({
     required this.id,
     required this.name,
     required this.author,
@@ -32,4 +34,7 @@ class Novel {
       imageUrl: map['imageUrl'] ?? '',
     );
   }
+
+  @override
+  List<Object?> get props => [id, name, author, introduction, imageUrl];
 }

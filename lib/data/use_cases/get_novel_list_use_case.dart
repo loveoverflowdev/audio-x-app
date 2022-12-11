@@ -5,7 +5,13 @@ import 'package:dartz/dartz.dart';
 import '../../domain/entities/novel.dart';
 import '../../domain/params.dart';
 
-class GetNovelListParams {}
+class GetNovelListParams {
+  final String searchText;
+
+  GetNovelListParams({
+    required this.searchText,
+  });
+}
 
 class GetNovelListUseCase
     implements UseCase<Iterable<Novel>, GetNovelListParams> {
@@ -17,6 +23,9 @@ class GetNovelListUseCase
 
   @override
   Future<Either<Iterable<Novel>, Exception>> invoke(GetNovelListParams params) {
-    return repository.getList(queryParam: NovelQueryParams());
+    return repository.getList(
+        queryParam: NovelQueryParams(
+      searchText: params.searchText,
+    ));
   }
 }

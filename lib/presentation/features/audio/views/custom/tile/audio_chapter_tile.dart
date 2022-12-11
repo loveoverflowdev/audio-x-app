@@ -1,5 +1,6 @@
 import 'package:audio_x_app/domain/entities/novel_chapter.dart';
 import 'package:audio_x_app/presentation/features/audio/views/custom/audio_listener/audio_listener_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AudioChapterTile extends StatelessWidget {
@@ -20,7 +21,7 @@ class AudioChapterTile extends StatelessWidget {
       novelChapter.name.isNotEmpty ? novelChapter.name : 'Chương $index';
 
   void _gotoAudioListenerPage(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) {
+    Navigator.push(context, CupertinoPageRoute(builder: (_) {
       return AudioListenerPage(
         title: title,
         mp3Url: novelChapter.source,

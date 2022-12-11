@@ -1,3 +1,5 @@
+import 'package:audio_x_app/presentation/features/personal/views/custom/favorite_novel_list_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/personal_tile_type.dart';
@@ -22,7 +24,22 @@ class PersonalPage extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final tile = _tiles[index];
             return ListTile(
-              onTap: () {},
+              onTap: () async {
+                switch (tile) {
+                  case PersonalTileType.history:
+                    // TODO: Handle this case.
+                    break;
+                  case PersonalTileType.about:
+                    // TODO: Handle this case.
+                    break;
+                  case PersonalTileType.favorites:
+                    await Navigator.push(context,
+                        CupertinoPageRoute(builder: (_) {
+                      return const FavorieNovelListPage();
+                    }));
+                    break;
+                }
+              },
               leading: Icon(
                 tile.icon,
               ),

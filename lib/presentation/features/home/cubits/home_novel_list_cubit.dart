@@ -19,18 +19,20 @@ class HomeNovelListCubit extends Cubit<HomeNovelListState> {
     required String title,
   }) async {
     emit(state.copyWith(status: HomeNovelListStatus.loading));
-    final result = await _getNovelListUseCase.invoke(GetNovelListParams());
+    final result =
+        await _getNovelListUseCase.invoke(GetNovelListParams(searchText: ''));
     result.fold(
       (l) {
         emit(state.copyWith(
-            novelList: l.toList(),
-            title: title,
-            status: HomeNovelListStatus.finished));
+          novelList: l.toList(),
+          title: title,
+          status: HomeNovelListStatus.finished,
+        ));
       },
       (r) {
-        emit(
-          state.copyWith(status: HomeNovelListStatus.error),
-        );
+        emit(state.copyWith(
+          status: HomeNovelListStatus.error,
+        ));
       },
     );
   }
