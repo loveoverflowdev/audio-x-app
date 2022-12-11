@@ -20,25 +20,35 @@ class HomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
-        child: ListView(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          children: [
-            BlocProvider(
-              create: (context) => HomeNovelListCubit(
-                getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
-              )..getNovelList(title: 'Truyện Hot'),
-              child: const HomeNovelGridView(),
+        child: Builder(builder: (context) {
+          final hotNovelCubit = HomeNovelListCubit(
+            getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
+          )..getNovelList(title: 'Truyện Hot');
+          final recommendNovelCubit = HomeNovelListCubit(
+            getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
+          )..getNovelList(title: 'Dành Cho Bạn');
+          return RefreshIndicator(
+            onRefresh: () async {
+              hotNovelCubit.getNovelList(title: 'Truyện Hot');
+              recommendNovelCubit.getNovelList(title: 'Dành Cho Bạn');
+            },
+            child: ListView(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              children: [
+                BlocProvider(
+                  create: (context) => hotNovelCubit,
+                  child: const HomeNovelGridView(),
+                ),
+                const SizedBox(height: 24),
+                BlocProvider(
+                  create: (context) => recommendNovelCubit,
+                  child: const HomeNovelGridView(),
+                ),
+              ],
             ),
-            const SizedBox(height: 24),
-            BlocProvider(
-              create: (context) => HomeNovelListCubit(
-                getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
-              )..getNovelList(title: 'Dành Cho Bạn'),
-              child: const HomeNovelGridView(),
-            ),
-          ],
-        ),
+          );
+        }),
       ),
     );
   }

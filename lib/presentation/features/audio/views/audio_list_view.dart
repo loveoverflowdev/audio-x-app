@@ -1,3 +1,4 @@
+import 'package:audio_x_app/presentation/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,19 +21,24 @@ class AudioListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 24, left: 16, right: 16),
+      padding: const EdgeInsets.only(top: 24),
       child: BlocBuilder<AudioChapterListCubit, AudioChapterListState>(
         builder: (context, state) {
+          if (state.status == AudioChapterListStatus.loading) {
+            return const LoadingWidget();
+          }
           final novelChapterList = state.novelChapterList;
           return ListView.builder(
             shrinkWrap: true,
             physics: physics,
             itemCount: novelChapterList.length,
             itemBuilder: (context, index) {
+              final chapterIndex = index + 1;
               return AudioChapterTile(
-                index: index,
+                index: chapterIndex,
                 novelChapter: novelChapterList[index],
-                title: 'Chương $index - ${novel.name}',
+                title: 'Chương $chapterIndex - ${novel.name}',
+                imageUrl: novel.imageUrl,
               );
             },
           );

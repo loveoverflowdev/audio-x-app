@@ -66,8 +66,8 @@ class _CommonCacheImageState extends State<CommonCacheImage> {
     final theme = Theme.of(context);
     final placeholderWidget = Shimmer.fromColors(
       direction: ShimmerDirection.ltr,
-      baseColor: theme.colorScheme.surface.withOpacity(0.8),
-      highlightColor: theme.colorScheme.surface.withOpacity(0.16),
+      baseColor: Colors.grey.shade100,
+      highlightColor: Colors.grey.shade600,
       child: Container(
         decoration: BoxDecoration(
           color: theme.dividerColor,

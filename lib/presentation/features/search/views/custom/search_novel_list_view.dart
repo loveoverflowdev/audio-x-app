@@ -1,4 +1,5 @@
 import 'package:audio_x_app/presentation/features/search/cubits/search_novel_list_cubit.dart';
+import 'package:audio_x_app/presentation/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,14 +26,20 @@ class SearchNovelListView extends StatelessWidget {
         ),
         BlocBuilder<SearchNovelListCubit, SearchNovelListState>(
           builder: (context, state) {
-            return SliverList(
-              key: centerKey,
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  final novel = state.novelList[index];
-                  return SearchNovelCell(novel: novel);
-                },
-                childCount: state.novelList.length,
+            return SliverVisibility(
+              replacementSliver: const SliverToBoxAdapter(
+                child: LoadingWidget(),
+              ),
+              visible: state.status != SearchNovelListStatus.loading,
+              sliver: SliverList(
+                key: centerKey,
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    final novel = state.novelList[index];
+                    return SearchNovelCell(novel: novel);
+                  },
+                  childCount: state.novelList.length,
+                ),
               ),
             );
           },

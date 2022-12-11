@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class AudioChapterTile extends StatelessWidget {
   final String title;
   final int index;
+  final String imageUrl;
   final NovelChapter novelChapter;
 
   const AudioChapterTile({
@@ -12,41 +13,65 @@ class AudioChapterTile extends StatelessWidget {
     required this.novelChapter,
     required this.index,
     required this.title,
+    required this.imageUrl,
   });
 
   String get novelChapterName =>
       novelChapter.name.isNotEmpty ? novelChapter.name : 'Chương $index';
 
+  void _gotoAudioListenerPage(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) {
+      return AudioListenerPage(
+        title: title,
+        mp3Url: novelChapter.source,
+        imageUrl: imageUrl,
+      );
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return AudioListenerPage(
-            title: title,
-            mp3Url: novelChapter.source,
-          );
-        }));
-      },
+    return InkWell(
+      onTap: () => _gotoAudioListenerPage(context),
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        padding: const EdgeInsets.only(top: 8, bottom: 8, left: 16, right: 16),
         child: SizedBox(
-          height: 40,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          height: 80,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: Text(novelChapterName)),
-              IconButton(
-                color: Theme.of(context).primaryColor,
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return AudioListenerPage(
-                      mp3Url: novelChapter.source,
-                      title: 'Chuong $index',
-                    );
-                  }));
-                },
-                icon: const Icon(Icons.play_arrow_rounded),
+              Text(
+                'Chương $index',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                  color: Colors.grey,
+                ),
+              ),
+              Flexible(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        novelChapterName,
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      child: IconButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () => _gotoAudioListenerPage(context),
+                        icon: const Icon(Icons.play_arrow_rounded),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

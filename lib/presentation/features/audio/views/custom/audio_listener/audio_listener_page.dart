@@ -1,4 +1,5 @@
 import 'package:audio_session/audio_session.dart';
+import 'package:audio_x_app/presentation/widgets/image/common_cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
@@ -7,19 +8,22 @@ import '../just_audio/common.dart';
 
 class AudioListenerPage extends StatefulWidget {
   final String title;
+  final String imageUrl;
   final String mp3Url;
 
   const AudioListenerPage({
     super.key,
     required this.mp3Url,
     required this.title,
+    required this.imageUrl,
   });
 
   @override
   State<AudioListenerPage> createState() => _AudioListenerPageState();
 }
 
-class _AudioListenerPageState extends State<AudioListenerPage> {
+class _AudioListenerPageState extends State<AudioListenerPage>
+    with WidgetsBindingObserver {
   final _player = AudioPlayer();
   late final LockCachingAudioSource _audioSource;
 
@@ -31,6 +35,7 @@ class _AudioListenerPageState extends State<AudioListenerPage> {
     _audioSource = LockCachingAudioSource(Uri.parse(
       widget.mp3Url,
     ));
+    WidgetsBinding.instance.addObserver(this);
   }
 
   Future<void> _init() async {
@@ -38,7 +43,7 @@ class _AudioListenerPageState extends State<AudioListenerPage> {
     await session.configure(const AudioSessionConfiguration.speech());
     _player.playbackEventStream.listen((event) {},
         onError: (Object e, StackTrace stackTrace) {
-      print('A stream error occurred: $e');
+      debugPrint('A stream error occurred: $e');
     });
     try {
       // Use resolve() if you want to obtain a UriAudioSource pointing directly
@@ -46,7 +51,7 @@ class _AudioListenerPageState extends State<AudioListenerPage> {
       // await _player.setAudioSource(await _audioSource.resolve());
       await _player.setAudioSource(_audioSource);
     } catch (e) {
-      print("Error loading audio source: $e");
+      debugPrint("Error loading audio source: $e");
     }
   }
 
@@ -56,6 +61,7 @@ class _AudioListenerPageState extends State<AudioListenerPage> {
     // Release decoders and buffers back to the operating system making them
     // available for other apps to use.
     _player.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -93,6 +99,26 @@ class _AudioListenerPageState extends State<AudioListenerPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 2,
+            child: AspectRatio(
+              aspectRatio: 4.5 / 6,
+              child: CommonCacheImage(
+                fit: BoxFit.cover,
+                imageUrl: widget.imageUrl,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            widget.title,
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.headline6!.color,
+            ),
+          ),
+          const SizedBox(height: 24),
           // Display play/pause button and volume/speed sliders.
           ControlButtons(_player),
           // Display seek bar. Using StreamBuilder, this widget rebuilds
@@ -110,16 +136,16 @@ class _AudioListenerPageState extends State<AudioListenerPage> {
               );
             },
           ),
-          ElevatedButton(
-            onPressed: _audioSource.clearCache,
-            child: Text(
-              'Clear cache',
-              style: Theme.of(context)
-                  .primaryTextTheme
-                  .titleMedium
-                  ?.copyWith(color: Colors.white),
-            ),
-          ),
+          // ElevatedButton(
+          //   onPressed: _audioSource.clearCache,
+          //   child: Text(
+          //     'Clear cache',
+          //     style: Theme.of(context)
+          //         .primaryTextTheme
+          //         .titleMedium
+          //         ?.copyWith(color: Colors.white),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -13,6 +13,7 @@ class AudioChapterListCubit extends Cubit<AudioChapterListState> {
   void getNovelChapterList({
     required String novelId,
   }) async {
+    emit(state.copyWith(status: AudioChapterListStatus.loading));
     final result = await getNovelChapterListUseCase
         .invoke(GetNovelChapterListParams(novelId: novelId));
     result.fold(
