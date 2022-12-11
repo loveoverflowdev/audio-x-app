@@ -8,6 +8,7 @@ class PersonalPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Personal'),
       ),
       body: Padding(
@@ -18,14 +19,14 @@ class PersonalPage extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: Text(
-                'Lich su nghe truyen',
+                'Lịch sử nghe truyện',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             TextButton(
               onPressed: () {},
               child: Text(
-                'Danh sach truyen uu thich',
+                'Danh sách truyện yêu thích',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),

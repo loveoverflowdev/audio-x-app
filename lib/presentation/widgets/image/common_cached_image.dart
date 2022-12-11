@@ -32,6 +32,7 @@ class _CommonCacheImageState extends State<CommonCacheImage> {
     BuildContext context, {
     required ImageProvider<Object>? imageProvider,
   }) {
+    FocusScope.of(context).requestFocus(FocusNode());
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) {
@@ -39,6 +40,7 @@ class _CommonCacheImageState extends State<CommonCacheImage> {
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
+                centerTitle: true,
                 iconTheme: const IconThemeData(
                   color: Colors.white, //change your color here
                 ),

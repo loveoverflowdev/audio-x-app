@@ -52,7 +52,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 child: TextField(
                   controller: _textEditingController,
                   textAlignVertical: TextAlignVertical.center,
-                  cursorColor: Theme.of(context).primaryColor,
+                  cursorColor: Theme.of(context).textTheme.headline6!.color,
                   decoration: InputDecoration(
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(right: 8),
@@ -63,17 +63,17 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                         },
                         icon: Icon(
                           Icons.clear,
-                          color: theme.primaryColor,
+                          color: Theme.of(context).textTheme.headline6!.color,
                         ),
                       ),
                     ),
                     border: InputBorder.none,
-                    hintText: 'Search...',
+                    hintText: 'Tên tác giả, tên truyện...',
                     contentPadding:
                         const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
                     hintStyle: theme.textTheme.bodyLarge?.copyWith(
                       color: theme.hintColor,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   onChanged: (value) {

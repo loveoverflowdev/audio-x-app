@@ -43,11 +43,11 @@ class _AppFrameState extends State<AppFrame> {
           title: tab.title.padRight(9, ' '),
           contentPadding: 0,
           iconSize: 24,
-          activeColorPrimary: theme.secondaryHeaderColor,
-          activeColorSecondary: theme.primaryColor,
-          inactiveColorPrimary: theme.dividerColor,
-          textStyle: theme.textTheme.titleMedium?.copyWith(
-            color: Colors.black,
+          activeColorPrimary: theme.colorScheme.secondary,
+          activeColorSecondary: Colors.white,
+          inactiveColorPrimary: Colors.white,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
           ),
         );
       }).toList();
@@ -64,7 +64,7 @@ class _AppFrameState extends State<AppFrame> {
         navBarHeight: kBottomNavigationBarHeight,
         items: _bottomBarItems(context),
         confineInSafeArea: true,
-        backgroundColor: theme.colorScheme.surface, // Default is Colors.white.
+        backgroundColor: theme.primaryColor, // Default is Colors.white.
         handleAndroidBackButtonPress: true, // Default is true.
         padding: const NavBarPadding.all(0),
         resizeToAvoidBottomInset:

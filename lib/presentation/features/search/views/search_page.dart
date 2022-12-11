@@ -15,7 +15,8 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text('Search'),
+        centerTitle: true,
+        title: Text('Tìm kiếm'),
       ),
       body: BlocProvider(
         create: (context) => SearchNovelListCubit(

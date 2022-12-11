@@ -19,7 +19,9 @@ class HomeNovelGridView extends StatelessWidget {
           padding: const EdgeInsets.only(top: 16, bottom: 16),
           child: Text(
             state.title,
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
         GridView.builder(

@@ -30,10 +30,7 @@ class SearchNovelListView extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   final novel = state.novelList[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SearchNovelCell(novel: novel),
-                  );
+                  return SearchNovelCell(novel: novel);
                 },
                 childCount: state.novelList.length,
               ),

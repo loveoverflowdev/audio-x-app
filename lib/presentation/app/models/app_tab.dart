@@ -23,11 +23,11 @@ extension AppTabLabel on AppTab {
   String get title {
     switch (this) {
       case AppTab.home:
-        return 'Home';
+        return 'Trang chủ';
       case AppTab.search:
-        return 'Search';
+        return 'Tìm kiếm';
       case AppTab.personal:
-        return 'Personal';
+        return 'Cá nhân';
     }
   }
 }

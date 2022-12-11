@@ -1,10 +1,11 @@
-import 'package:audio_x_app/presentation/features/audio/views/audio_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../features/audio/audio.dart';
+import '../theme/theme_config.dart';
 import 'views/app_frame.dart';
-import 'app_theme.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -37,9 +38,22 @@ class App extends StatelessWidget {
     );
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: defaultTheme,
+      theme: themeData(ThemeConfig.darkTheme),
+      darkTheme: themeData(ThemeConfig.darkTheme),
       routerConfig: _router,
       title: 'Audio X demo',
+    );
+  }
+
+  // Apply font to our app's theme
+  ThemeData themeData(ThemeData theme) {
+    return theme.copyWith(
+      textTheme: GoogleFonts.sourceSansProTextTheme(
+        theme.textTheme,
+      ),
+      colorScheme: theme.colorScheme.copyWith(
+        secondary: ThemeConfig.lightAccent,
+      ),
     );
   }
 }

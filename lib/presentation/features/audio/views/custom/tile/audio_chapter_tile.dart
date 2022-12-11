@@ -3,6 +3,7 @@ import 'package:audio_x_app/presentation/features/audio/views/custom/audio_liste
 import 'package:flutter/material.dart';
 
 class AudioChapterTile extends StatelessWidget {
+  final String title;
   final int index;
   final NovelChapter novelChapter;
 
@@ -10,6 +11,7 @@ class AudioChapterTile extends StatelessWidget {
     super.key,
     required this.novelChapter,
     required this.index,
+    required this.title,
   });
 
   String get novelChapterName =>
@@ -21,7 +23,7 @@ class AudioChapterTile extends StatelessWidget {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (_) {
           return AudioListenerPage(
-            title: 'Chuong $index',
+            title: title,
             mp3Url: novelChapter.source,
           );
         }));
