@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../features/forum/views/forum_page.dart';
 import '../../features/personal/personal.dart';
 import '../../features/search/search.dart';
 import '../../features/home/home.dart';
@@ -15,14 +16,14 @@ class AppFrame extends StatefulWidget {
 
 class _AppFrameState extends State<AppFrame> {
   late PersistentTabController _controller;
+  late List<AppTab> _appTabList;
 
   @override
   void initState() {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
+    _appTabList = AppTab.values;
   }
-
-  final _appTabList = AppTab.values;
 
   List<Widget> get _pages => _appTabList.map((tab) {
         switch (tab) {
@@ -32,6 +33,8 @@ class _AppFrameState extends State<AppFrame> {
             return const SearchPage();
           case AppTab.personal:
             return const PersonalPage();
+          case AppTab.forum:
+            return const ForumPage();
         }
       }).toList();
 

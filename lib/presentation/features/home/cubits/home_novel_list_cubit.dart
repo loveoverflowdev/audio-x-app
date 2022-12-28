@@ -17,10 +17,11 @@ class HomeNovelListCubit extends Cubit<HomeNovelListState> {
 
   void getNovelList({
     required String title,
+    required String tag,
   }) async {
     emit(state.copyWith(status: HomeNovelListStatus.loading));
     final result =
-        await _getNovelListUseCase.invoke(GetNovelListParams(searchText: ''));
+        await _getNovelListUseCase.invoke(GetNovelListParams(searchText: tag));
     result.fold(
       (l) {
         emit(state.copyWith(

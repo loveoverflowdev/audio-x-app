@@ -1,11 +1,14 @@
 import 'package:equatable/equatable.dart';
 
+import '../../core/utils/formatter.dart';
+
 class Novel extends Equatable {
   final String id;
   final String name;
   final String author;
   final String introduction;
   final String imageUrl;
+  final String? dateTime;
 
   const Novel({
     required this.id,
@@ -13,6 +16,7 @@ class Novel extends Equatable {
     required this.author,
     required this.introduction,
     required this.imageUrl,
+    this.dateTime,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +26,7 @@ class Novel extends Equatable {
       'author': author,
       'introduction': introduction,
       'imageUrl': imageUrl,
+      'dateTime': dateTime,
     };
   }
 
@@ -32,6 +37,7 @@ class Novel extends Equatable {
       author: map['author'] ?? '',
       introduction: map['introduction'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
+      dateTime: Formatter().dateTimeToDdMmYyyy_HhMmSs(DateTime.now()),
     );
   }
 

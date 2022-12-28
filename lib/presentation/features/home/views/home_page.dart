@@ -23,18 +23,19 @@ class HomePage extends StatelessWidget {
         child: Builder(builder: (context) {
           final hotNovelCubit = HomeNovelListCubit(
             getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
-          )..getNovelList(title: 'Truyện Hot');
+          )..getNovelList(title: 'Truyện Hot', tag: '_tag1');
           final recommendNovelCubit = HomeNovelListCubit(
             getNovelListUseCase: GetIt.instance<GetNovelListUseCase>(),
-          )..getNovelList(title: 'Truyện Phổ Biến');
+          )..getNovelList(title: 'Truyện Phổ Biến', tag: '_tag2');
           return RefreshIndicator(
             onRefresh: () async {
-              hotNovelCubit.getNovelList(title: 'Truyện Hot');
-              recommendNovelCubit.getNovelList(title: 'Truyện Phổ Biến');
+              hotNovelCubit.getNovelList(title: 'Truyện Hot', tag: '_tag1');
+              recommendNovelCubit.getNovelList(
+                  title: 'Truyện Phổ Biến', tag: '_tag2');
             },
             child: ListView(
               shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               children: [
                 BlocProvider(
                   create: (context) => hotNovelCubit,

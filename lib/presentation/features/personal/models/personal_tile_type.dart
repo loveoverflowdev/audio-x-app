@@ -10,7 +10,7 @@ extension PersonalTileTypeExt on PersonalTileType {
   String get title {
     switch (this) {
       case PersonalTileType.history:
-        return 'Lịch sử nghe truyện';
+        return 'Truyện đã nghe';
       case PersonalTileType.about:
         return 'Về app';
       case PersonalTileType.favorites:

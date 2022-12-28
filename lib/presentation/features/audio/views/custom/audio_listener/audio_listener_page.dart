@@ -1,6 +1,8 @@
 import 'package:audio_session/audio_session.dart';
+import 'package:audio_x_app/data/respositories/novel_history_repository.dart';
 import 'package:audio_x_app/presentation/widgets/image/common_cached_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -32,6 +34,7 @@ class _AudioListenerPageState extends State<AudioListenerPage>
     super.initState();
     // ambiguate(WidgetsBinding.instance)!.addObserver(this);
     _init();
+
     _audioSource = LockCachingAudioSource(Uri.parse(
       widget.mp3Url,
     ));
@@ -95,58 +98,62 @@ class _AudioListenerPageState extends State<AudioListenerPage>
         centerTitle: true,
         title: Text(widget.title),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 2,
-            child: AspectRatio(
-              aspectRatio: 4.5 / 6,
-              child: CommonCacheImage(
-                fit: BoxFit.cover,
-                imageUrl: widget.imageUrl,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 2,
+              child: AspectRatio(
+                aspectRatio: 4.5 / 6,
+                child: CommonCacheImage(
+                  fit: BoxFit.cover,
+                  imageUrl: widget.imageUrl,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            widget.title,
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.headline6!.color,
+            const SizedBox(height: 16),
+            Text(
+              widget.title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.headline6!.color,
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          // Display play/pause button and volume/speed sliders.
-          ControlButtons(_player),
-          // Display seek bar. Using StreamBuilder, this widget rebuilds
-          // each time the position, buffered position or duration changes.
-          StreamBuilder<PositionData>(
-            stream: _positionDataStream,
-            builder: (context, snapshot) {
-              final positionData = snapshot.data;
-              return SeekBar(
-                duration: positionData?.duration ?? Duration.zero,
-                position: positionData?.position ?? Duration.zero,
-                bufferedPosition:
-                    positionData?.bufferedPosition ?? Duration.zero,
-                onChangeEnd: _player.seek,
-              );
-            },
-          ),
-          // ElevatedButton(
-          //   onPressed: _audioSource.clearCache,
-          //   child: Text(
-          //     'Clear cache',
-          //     style: Theme.of(context)
-          //         .primaryTextTheme
-          //         .titleMedium
-          //         ?.copyWith(color: Colors.white),
-          //   ),
-          // ),
-        ],
+            const SizedBox(height: 24),
+            // Display play/pause button and volume/speed sliders.
+            ControlButtons(_player),
+            // Display seek bar. Using StreamBuilder, this widget rebuilds
+            // each time the position, buffered position or duration changes.
+            StreamBuilder<PositionData>(
+              stream: _positionDataStream,
+              builder: (context, snapshot) {
+                final positionData = snapshot.data;
+                return SeekBar(
+                  duration: positionData?.duration ?? Duration.zero,
+                  position: positionData?.position ?? Duration.zero,
+                  bufferedPosition:
+                      positionData?.bufferedPosition ?? Duration.zero,
+                  onChangeEnd: _player.seek,
+                );
+              },
+            ),
+            // ElevatedButton(
+            //   onPressed: _audioSource.clearCache,
+            //   child: Text(
+            //     'Clear cache',
+            //     style: Theme.of(context)
+            //         .primaryTextTheme
+            //         .titleMedium
+            //         ?.copyWith(color: Colors.white),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:audio_x_app/presentation/features/audio/audio.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../../../domain/entities/novel.dart';
@@ -11,6 +10,7 @@ import '../../../../../widgets/image/common_cached_image.dart';
 class PersonalNovelCell extends StatelessWidget {
   final Novel novel;
   final void Function() onPopAfterPush;
+  final bool showDateTime;
 
   static const uuid = Uuid();
   final String _imageTag = uuid.v4();
@@ -20,6 +20,7 @@ class PersonalNovelCell extends StatelessWidget {
     super.key,
     required this.novel,
     required this.onPopAfterPush,
+    this.showDateTime = false,
   });
 
   @override
@@ -76,6 +77,11 @@ class PersonalNovelCell extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // TODO: handle this
+                  // Visibility(
+                  //   visible: showDateTime,
+                  //   child: Text(novel.dateTime ?? ''),
+                  // ),
                 ],
               ),
             ),

@@ -39,6 +39,7 @@ class AudioListView extends StatelessWidget {
                 novelChapter: novelChapterList[index],
                 title: 'Chương $chapterIndex - ${novel.name}',
                 imageUrl: novel.imageUrl,
+                novel: novel,
               );
             },
           );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 enum AppTab {
   search,
   home,
+  forum,
   personal,
 }
 
@@ -15,6 +16,8 @@ extension AppTabIcon on AppTab {
         return Icons.search;
       case AppTab.personal:
         return Icons.person;
+      case AppTab.forum:
+        return Icons.chat_bubble;
     }
   }
 }
@@ -28,6 +31,8 @@ extension AppTabLabel on AppTab {
         return 'Tìm kiếm';
       case AppTab.personal:
         return 'Cá nhân';
+      case AppTab.forum:
+        return 'Diễn đàn';
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:audio_x_app/presentation/features/personal/views/custom/favorite_novel_list_page.dart';
+import 'package:audio_x_app/presentation/features/personal/views/custom/novel_history_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,9 @@ class PersonalPage extends StatelessWidget {
               onTap: () async {
                 switch (tile) {
                   case PersonalTileType.history:
-                    // TODO: Handle this case.
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) {
+                      return const NovelHistoryPage();
+                    }));
                     break;
                   case PersonalTileType.about:
                     showAboutDialog(
@@ -45,8 +48,7 @@ class PersonalPage extends StatelessWidget {
                     );
                     break;
                   case PersonalTileType.favorites:
-                    await Navigator.push(context,
-                        CupertinoPageRoute(builder: (_) {
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) {
                       return const FavorieNovelListPage();
                     }));
                     break;
